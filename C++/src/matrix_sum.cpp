@@ -12,10 +12,10 @@
 typedef int int_array[ROW_SIZE];
 typedef int int_matrix[ROW_SIZE][ROW_SIZE];
 
-void generateMatrix(int_matrix &mx);
-void concurrentSum(int_array &a, int_array &b, int_array &r);
-void printMatrix(int_matrix &ma, int_matrix &mb, int_matrix &mr);
-void sequentialSum(int_matrix &ma, int_matrix &mb, int_matrix &mr);
+void GenerateMatrix(int_matrix &mx);
+void ConcurrentSum(int_array &a, int_array &b, int_array &r);
+void PrintMatrix(int_matrix &ma, int_matrix &mb, int_matrix &mr);
+void SequentialSum(int_matrix &ma, int_matrix &mb, int_matrix &mr);
 
 int main()
 {
@@ -28,14 +28,14 @@ int main()
 
   srand(time(0));
 
-  generateMatrix(matrix_a);
-  generateMatrix(matrix_b);
+  GenerateMatrix(matrix_a);
+  GenerateMatrix(matrix_b);
 
-  sequentialSum(matrix_a, matrix_b, matrix_cs);
+  SequentialSum(matrix_a, matrix_b, matrix_cs);
 
   for (size_t i = 0; i < ROW_SIZE; i++)
   {
-    threads[i] = std::thread(concurrentSum, std::ref(matrix_a[i]),
+    threads[i] = std::thread(ConcurrentSum, std::ref(matrix_a[i]),
                              std::ref(matrix_b[i]), std::ref(matrix_cc[i]));
   }
 
@@ -44,7 +44,7 @@ int main()
     threads[i].join();
   }
 
-  printMatrix(matrix_a, matrix_b, matrix_cc);
+  PrintMatrix(matrix_a, matrix_b, matrix_cc);
 
   for (size_t i = 0; i < ROW_SIZE; i++)
   {
@@ -63,7 +63,7 @@ int main()
   return EXIT_SUCCESS;
 }
 
-void generateMatrix(int_matrix &mx)
+void GenerateMatrix(int_matrix &mx)
 {
   for (size_t i = 0; i < ROW_SIZE; i++)
   {
@@ -75,7 +75,7 @@ void generateMatrix(int_matrix &mx)
   }
 }
 
-void sequentialSum(int_matrix &ma, int_matrix &mb, int_matrix &mr)
+void SequentialSum(int_matrix &ma, int_matrix &mb, int_matrix &mr)
 {
   for (size_t i = 0; i < ROW_SIZE; i++)
   {
@@ -86,7 +86,7 @@ void sequentialSum(int_matrix &ma, int_matrix &mb, int_matrix &mr)
   }
 }
 
-void concurrentSum(int_array &a, int_array &b, int_array &r)
+void ConcurrentSum(int_array &a, int_array &b, int_array &r)
 {
   for (size_t i = 0; i < ROW_SIZE; i++)
   {
@@ -94,7 +94,7 @@ void concurrentSum(int_array &a, int_array &b, int_array &r)
   }
 }
 
-void printMatrix(int_matrix &ma, int_matrix &mb, int_matrix &mr)
+void PrintMatrix(int_matrix &ma, int_matrix &mb, int_matrix &mr)
 {
   for (size_t i = 0; i < ROW_SIZE; i++)
   {
