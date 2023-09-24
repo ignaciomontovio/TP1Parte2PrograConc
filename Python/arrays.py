@@ -6,8 +6,8 @@ import time
 MAX_THREADS = 5
 ROW = 5
 COLUMN = 5
-MAX_NUMBER = 23
-MIN_NUMBER = -23
+MAX_NUMBER = 32
+MIN_NUMBER = -32
 
 CS = numpy.empty(
     (ROW, COLUMN),
